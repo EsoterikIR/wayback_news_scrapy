@@ -1,0 +1,96 @@
+{
+  "SELECTORS": {
+    "title": [
+      "title",
+      "meta[property*='og:title']",
+      "meta[name*='title']",
+      "h1",
+      "h2",
+      "h3",
+      "[class*='title']",
+      "[class*='heading']",
+      "[id*='title']",
+      "[id*='heading']",
+      "//span[contains(., 'Title')]",
+      "//div[contains(., 'Title')]",
+      ".text_1"
+    ],
+    "description": [
+      "meta[name*='description']::attr(content)",
+      "meta[property*='og:description']::attr(content)",
+      "[class*='summary']",
+      "[class*='description']",
+      "[class*='excerpt']",
+      "[id*='summary']",
+      "[id*='description']",
+      "[id*='excerpt']",
+      "//span[contains(., 'Description')]",
+      "//div[contains(., 'Description')]",
+      ".text_2"
+    ],
+    "date": [
+      "meta[name*='date']",
+      "meta[property*='article:published_time']",
+      "time",
+      "[datetime]",
+      "[class*='date']",
+      "[class*='time']",
+      "[id*='date']",
+      "[id*='time']",
+      "//span[contains(., 'Date')]",
+      "//span[contains(., 'Time')]",
+      "//div[contains(., 'Date')]",
+      "//div[contains(., 'Time')]",
+      ".text_3"
+    ],
+    "author": [
+      "meta[name*='author']",
+      "meta[property*='article:author']",
+      "[class*='author']",
+      "[class*='byline']",
+      "[id*='author']",
+      "[id*='byline']",
+      "//span[contains(., 'Author')]",
+      "//span[contains(., 'Byline')]",
+      "//div[contains(., 'Author')]",
+      "//div[contains(., 'Byline')]",
+      ".text_4"
+    ],
+    "keywords": [
+      "meta[name*='keywords']",
+      "meta[property*='article:tag']",
+      "[class*='tags']",
+      "[class*='keywords']",
+      "[id*='tags']",
+      "[id*='keywords']",
+      "//span[contains(., 'Keywords')]",
+      "//span[contains(., 'Tags')]",
+      "//div[contains(., 'Keywords')]",
+      "//div[contains(., 'Tags')]",
+      ".text_5"
+    ],
+    "text": [
+      "[itemprop*='articleBody']",
+      "article",
+      "[class*='article']",
+      "[class*='post']",
+      "[class*='content']",
+      "[class*='body']",
+      "[id*='article']",
+      "[id*='post']",
+      "[id*='content']",
+      "[id*='body']",
+      ".text_6",
+      "p"
+    ],
+    "editor": [
+      "meta[name*='editor']",
+      "[class*='editor']",
+      "[id*='editor']",
+      "//span[contains(., 'Editor')]",
+      "//div[contains(., 'Editor')]",
+      "p[style*='text-align:right']::text",
+      ".text_7"
+    ]
+  }
+}
