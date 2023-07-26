@@ -1,0 +1,11 @@
+beautifulsoup4
+chardet
+dateutil
+jsonschema
+langdetect
+psycopg2
+psycopg2-pool
+scrapy
+scrapy-wayback-machine
+tldextract
+unidecode
