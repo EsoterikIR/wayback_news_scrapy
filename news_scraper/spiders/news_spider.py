@@ -47,9 +47,9 @@ class NewsSpider(scrapy.Spider):
 
     name = "news_spider"
     custom_settings = {
-        'DOWNLOAD_DELAY': 0.1,
+        'DOWNLOAD_DELAY': 2,
         'USER_AGENT': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.150 Safari/537.36',
-        'CONCURRENT_REQUESTS': 100,
+        'CONCURRENT_REQUESTS': 1,
         'WAYBACK_MACHINE_TIME_RANGE': (datetime(1995, 1, 1), datetime(2023, 7, 24)),
         'DOWNLOADER_MIDDLEWARES': {
             'scrapy_wayback_machine.WaybackMachineMiddleware': 5,
@@ -244,12 +244,17 @@ class NewsSpider(scrapy.Spider):
         lang = response.xpath('/html/@lang').get()
         if not lang:
             lang = response.xpath('/html/@xml:lang').get()
+            
+        path = urlparse(url).path.strip()
+        
         return (
             article['text'] and
             len(article['text']) >= 300 and
             not any(unwanted in urlparse(url).path for unwanted in UNWANTED_SUBDOMAINS) and
+            path and  # Add this line to check if the path is not empty
             self.is_english(article['text'], lang)  # Language check comes last
         )
+
 
     def is_english(self, text, lang):
         """
@@ -263,13 +268,14 @@ class NewsSpider(scrapy.Spider):
         bool: True if the text is in English, False otherwise.
         """
 
-        if lang:
-            return 'en' in lang  # If language metadata is present, it checks if 'en' is in it
-        try:  # If language metadata is not present, then use language detection library
-            return detect(text) == 'en'
-        except Exception as e:
-            self.logger.error(f"Error occurred while detecting language: {e}")
-            return False
+        if lang:  # If language metadata is present, it checks if 'en' is in it
+            return 'en' in lang  
+        else:  # If language metadata is not present, then use language detection library
+            try: 
+                return detect(text) == 'en'
+            except Exception as e:
+                self.logger.error(f"Error occurred while detecting language: {e}")
+                return False
 
 
     def clean_data(self, data, url, encoding):
